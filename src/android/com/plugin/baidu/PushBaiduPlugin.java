@@ -120,8 +120,8 @@ public class PushBaiduPlugin extends CordovaPlugin {
    */
   public void sendJavascript(HashMap data, HashMap payload) {
     try {
-      data.put("pushTopic", pushTopic);
       JSONObject _data = new JSONObject(data);
+      payload.put("pushTopic", pushTopic);
       _data.put("payload", new JSONObject(payload));
 
       String _d = "javascript:" + gECB + "(" + _data.toString() + ")";
