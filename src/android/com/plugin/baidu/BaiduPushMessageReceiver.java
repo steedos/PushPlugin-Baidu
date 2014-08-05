@@ -116,7 +116,6 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
       }
     }
 
-    data.put("payload", payload);
     PushBaiduPlugin.getInstance().sendJavascript(data, payload);
   }
 
@@ -146,7 +145,8 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
 
       PushBaiduPlugin.getInstance().sendSuccess(data);
     } else {
-      PushBaiduPlugin.getInstance().sendError("从百度解除绑定失败，errorCode：" + errorCode);
+      PushBaiduPlugin.getInstance().sendError(
+          "从百度解除绑定失败，errorCode：" + errorCode);
     }
   }
 }

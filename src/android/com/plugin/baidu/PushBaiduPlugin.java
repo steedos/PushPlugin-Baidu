@@ -28,6 +28,7 @@ public class PushBaiduPlugin extends CordovaPlugin {
 
   private static CordovaWebView gWebView;
   private static String gECB;
+  private static String pushTopic;
 
   public PushBaiduPlugin() {
     super();
@@ -58,6 +59,7 @@ public class PushBaiduPlugin extends CordovaPlugin {
         Log.v(TAG, "execute: jo=" + jo.toString());
 
         gECB = (String) jo.get("ecb");
+        pushTopic = jo.getString("pushTopic");
         String apiKey = jo.getString("api_key");
 
         Log.v(TAG, "execute: ECB=" + gECB + " apiKey=" + apiKey);
@@ -118,9 +120,9 @@ public class PushBaiduPlugin extends CordovaPlugin {
    */
   public void sendJavascript(HashMap data, HashMap payload) {
     try {
+      data.put("pushTopic", pushTopic);
       JSONObject _data = new JSONObject(data);
-      JSONObject _payload = new JSONObject(data);
-      _data.put("payload", _payload);
+      _data.put("payload", new JSONObject(payload));
 
       String _d = "javascript:" + gECB + "(" + _data.toString() + ")";
       Log.v(TAG, "sendJavascript: " + _d);
