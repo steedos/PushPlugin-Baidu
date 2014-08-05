@@ -66,7 +66,6 @@ public class PushBaiduPlugin extends CordovaPlugin {
             PushConstants.LOGIN_TYPE_API_KEY, apiKey);
 
         result = true;
-        callbackContext.success();
       } catch (JSONException e) {
         Log.e(TAG, "execute: Got JSON Exception " + e.getMessage());
         result = false;
@@ -78,7 +77,6 @@ public class PushBaiduPlugin extends CordovaPlugin {
 
       Log.v(TAG, "UNREGISTER");
       result = true;
-      callbackContext.success();
     } else {
       result = false;
       Log.e(TAG, "Invalid action : " + action);

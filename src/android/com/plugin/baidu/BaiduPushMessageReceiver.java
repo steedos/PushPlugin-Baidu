@@ -138,6 +138,15 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
     // 解绑定成功，设置未绑定flag，
     if (errorCode == 0) {
       Utils.setBind(context, false);
+
+      HashMap data = new HashMap();
+      data.put("errorCode", errorCode + "");
+      data.put("requestId", requestId);
+      data.put("event", "unregistered");
+
+      PushBaiduPlugin.getInstance().sendSuccess(data);
+    } else {
+      PushBaiduPlugin.getInstance().sendError("从百度解除绑定失败，errorCode：" + errorCode);
     }
   }
 }
