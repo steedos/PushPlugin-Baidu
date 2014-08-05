@@ -37,7 +37,8 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
       PushBaiduPlugin.getInstance().sendSuccess(data);
     } else {
       Utils.setBind(context, false);
-      PushBaiduPlugin.getInstance().sendError("绑定到百度失败，errorCode：" + errorCode);
+      PushBaiduPlugin.getInstance().sendError(
+          "绑定到百度失败，errorCode：" + errorCode);
     }
   }
 
@@ -67,10 +68,10 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
 
     HashMap data = new HashMap();
     data.put("event", "message");
-    
+
     HashMap payload = new HashMap();
     payload.put("message", message);
-    
+
     // 自定义内容获取方式，mykey和myvalue对应透传消息推送时自定义内容中设置的键和值
     if (!TextUtils.isEmpty(customContentString)) {
       JSONObject customJson = null;
@@ -84,8 +85,7 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
       }
     }
 
-    data.put("payload", payload);
-    PushBaiduPlugin.getInstance().sendJavascript(data);
+    PushBaiduPlugin.getInstance().sendJavascript(data, payload);
   }
 
   @Override
@@ -97,11 +97,11 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
 
     HashMap data = new HashMap();
     data.put("event", "notification_clicked");
-    
+
     HashMap payload = new HashMap();
     payload.put("title", title);
     payload.put("description", description);
-    
+
     // 自定义内容获取方式，mykey和myvalue对应通知推送时自定义内容中设置的键和值
     if (!TextUtils.isEmpty(customContentString)) {
       JSONObject customJson = null;
@@ -115,9 +115,9 @@ public class BaiduPushMessageReceiver extends FrontiaPushMessageReceiver {
         e.printStackTrace();
       }
     }
-    
+
     data.put("payload", payload);
-    PushBaiduPlugin.getInstance().sendJavascript(data);
+    PushBaiduPlugin.getInstance().sendJavascript(data, payload);
   }
 
   @Override

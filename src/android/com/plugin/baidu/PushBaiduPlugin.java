@@ -25,7 +25,7 @@ public class PushBaiduPlugin extends CordovaPlugin {
 
   private static PushBaiduPlugin _THIS;
   private CallbackContext callbackContext = null;
-  
+
   private static CordovaWebView gWebView;
   private static String gECB;
 
@@ -61,9 +61,10 @@ public class PushBaiduPlugin extends CordovaPlugin {
         String apiKey = jo.getString("api_key");
 
         Log.v(TAG, "execute: ECB=" + gECB + " apiKey=" + apiKey);
-        
-        PushManager.startWork(getApplicationContext(), PushConstants.LOGIN_TYPE_API_KEY, apiKey);
-        
+
+        PushManager.startWork(getApplicationContext(),
+            PushConstants.LOGIN_TYPE_API_KEY, apiKey);
+
         result = true;
         callbackContext.success();
       } catch (JSONException e) {
@@ -90,7 +91,8 @@ public class PushBaiduPlugin extends CordovaPlugin {
    * 绑定到Baidu时成功
    * 
    * @param data
-   * data中的字段(绑定成功后，百度返回的): errorCode, appid, userId, channelId, requestId
+   *            data中的字段(绑定成功后，百度返回的): errorCode, appid, userId, channelId,
+   *            requestId
    */
   public void sendSuccess(HashMap registration) {
     if (this.callbackContext != null) {
@@ -116,17 +118,23 @@ public class PushBaiduPlugin extends CordovaPlugin {
    * 
    * @param _json
    */
-  public void sendJavascript(HashMap data) {
-  JSONObject _json = new JSONObject(data);
+  public void sendJavascript(HashMap data, HashMap payload) {
+    try {
+      JSONObject _data = new JSONObject(data);
+      JSONObject _payload = new JSONObject(data);
+      _data.put("payload", _payload);
 
-    String _d = "javascript:" + gECB + "(" + _json.toString() + ")";
-    Log.v(TAG, "sendJavascript: " + _d);
+      String _d = "javascript:" + gECB + "(" + _data.toString() + ")";
+      Log.v(TAG, "sendJavascript: " + _d);
 
-  if (gECB != null && gWebView != null) {
-    gWebView.sendJavascript(_d);
+      if (gECB != null && gWebView != null) {
+        gWebView.sendJavascript(_d);
+      }
+    } catch (JSONException ex) {
+      ex.printStackTrace();
+    }
   }
-  }
-  
+
   private Context getApplicationContext() {
     return this.cordova.getActivity().getApplicationContext();
   }
@@ -135,4 +143,3 @@ public class PushBaiduPlugin extends CordovaPlugin {
     return _THIS;
   }
 }
-

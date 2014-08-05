@@ -9,7 +9,7 @@
 
 	<description>
 		This plugin allows your application to receive push notifications on Android, iOS and WP8 devices.
-    Android uses Google Cloud Messaging.
+    Android uses Baidu Cloud Push.
     iOS uses Apple APNS Notifications.
     WP8 uses Microsoft MPNS Notifications.
 	</description>
