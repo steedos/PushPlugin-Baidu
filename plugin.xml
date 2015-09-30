@@ -102,7 +102,7 @@
       <!-- push结束 -->
     </config-file>
 
-    <source-file src="src/android/libs/pushservice-4.0.0.jar" target-dir="libs/" />
+    <source-file src="src/android/libs/pushservice-4.5.3.48.jar" target-dir="libs/" />
     <source-file src="src/android/com/plugin/baidu/Utils.java" target-dir="src/com/plugin/baidu" />
     <source-file src="src/android/com/plugin/baidu/BaiduPushMessageReceiver.java" target-dir="src/com/plugin/baidu" />
     <source-file src="src/android/com/plugin/baidu/PushBaiduPlugin.java" target-dir="src/com/plugin/baidu" />
