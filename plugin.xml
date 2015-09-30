@@ -102,6 +102,11 @@
       <!-- push结束 -->
     </config-file>
 
+    <source-file src="src/android/libs/mips/libbdpush_V2_3.so" target-dir="libs/mips" />
+    <source-file src="src/android/libs/armeabi/libbdpush_V2_3.so" target-dir="libs/armeabi" />
+    <source-file src="src/android/libs/armeabi_v7/libbdpush_V2_3.so" target-dir="libs/armeabi_v7" />
+    <source-file src="src/android/libs/armeabi-v7a/libbdpush_V2_3.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="src/android/libs/gcm.jar" target-dir="libs/" />
     <source-file src="src/android/libs/pushservice-4.5.3.48.jar" target-dir="libs/" />
     <source-file src="src/android/com/plugin/baidu/Utils.java" target-dir="src/com/plugin/baidu" />
     <source-file src="src/android/com/plugin/baidu/BaiduPushMessageReceiver.java" target-dir="src/com/plugin/baidu" />
