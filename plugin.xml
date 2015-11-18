@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
     id="com.phonegap.plugins.PushPlugin"
-    version="2.2.0">
+    version="2.5.0">
 
   <name>PushPlugin</name>
 	<author>Bob Easterday</author>
@@ -12,12 +14,13 @@
     Android uses Baidu Cloud Push.
     iOS uses Apple APNS Notifications.
     WP8 uses Microsoft MPNS Notifications.
+    Windows8 uses Microsoft WNS Notifications.
 	</description>
 
 	<license>MIT</license>
 
 	<js-module src="www/PushNotification.js" name="PushNotification">
-   	<clobbers target="PushNotification" />
+        <clobbers target="PushNotification" />
 	</js-module>
 
 	<engines>
@@ -26,6 +29,7 @@
 
 	<!-- android -->
 	<platform name="android">
+        <framework src="com.android.support:support-v4:+" />
 
 		<config-file target="res/xml/config.xml" parent="/*">
       <feature name="PushPlugin">
@@ -101,7 +105,6 @@
           android:exported="true" />
       <!-- push结束 -->
     </config-file>
-
     <source-file src="src/android/libs/mips/libbdpush_V2_3.so" target-dir="libs/mips" />
     <source-file src="src/android/libs/armeabi/libbdpush_V2_3.so" target-dir="libs/armeabi" />
     <source-file src="src/android/libs/armeabi_v7/libbdpush_V2_3.so" target-dir="libs/armeabi_v7" />
@@ -130,8 +133,20 @@
 
 	</platform>
 
-  <!-- wp8 -->
-  <platform name="wp8">
+    <!-- blackberry10 -->
+    <platform name="blackberry10">
+        <dependency id="com.blackberry.push" />
+        <dependency id="com.blackberry.invoked" />
+        <config-file target="www/config.xml" parent="/widget">
+            <feature name="PushPlugin" value="PushPlugin" />
+        </config-file>
+        <js-module src="www/blackberry10/PushPluginProxy.js" name="PushPluginProxy" >
+            <runs />
+        </js-module>
+    </platform>
+
+    <!-- wp8 -->
+    <platform name="wp8">
 
     <config-file target="config.xml" parent="/*">
       <feature name="PushPlugin">
@@ -144,7 +159,22 @@
     </config-file>
 
     <source-file src="src/wp8/PushPlugin.cs" />
+    <framework src="src/wp8/Newtonsoft.Json.dll" custom="true" />
 
+  </platform>
+
+  <!-- windows8 -->
+  <platform name="windows8">
+    <js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
+      <merges target="" />
+    </js-module>
+  </platform>
+
+  <!-- windows -->
+  <platform name="windows">
+    <js-module src="src/windows/PushPluginProxy.js" name="PushPlugin">
+      <merges target="" />
+    </js-module>
   </platform>
 
 </plugin>
